@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pobreflix - Login e Planos</title>
+    <style>
+        body {
+            background-color: #141414;
+            color: white;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 50px;
+            min-height: calc(100vh - 100px); /* Ajusta para a tela inteira com espaço para rodapé */
+            flex-wrap: wrap; /* Permite que os itens quebrem a linha em telas menores */
+        }
+
+        .left-side {
+            text-align: center;
+            padding: 20px;
+            max-width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slogan {
+            font-size: 2.5rem;
+            color: #e50914;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+        
+        .slogan-complement {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 400px;
+            background-color: #333;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #aaa;
+            font-size: 1.5rem;
+        }
+        
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Garante que a imagem preencha o container sem distorcer */
+            border-radius: 8px;
+        }
+
+        .right-side {
+            background-color: #000;
+            padding: 40px 60px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 450px;
+        }
+
+        h1 {
+            color: #e50914;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .input-group input {
+            padding: 12px;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: none;
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+
+        .input-group input::placeholder {
+            color: #aaa;
+        }
+        
+        .planos-tabela {
+            text-align: left;
+            margin-top: 30px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #1a1a1a;
+        }
+
+        .planos-tabela h3 {
+            color: #e50914;
+            margin-bottom: 15px;
+        }
+
+        .planos-tabela ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .planos-tabela li {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .planos-tabela li:last-child {
+            border-bottom: none;
+        }
+
+        .planos-tabela .plano-nome {
+            font-weight: bold;
+        }
+
+        .planos-tabela .plano-preco {
+            color: #ccc;
+        }
+
+        button {
+            background-color: #e50914;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background-color: #f40612;
+        }
+        
+        .result {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #e50914;
+        }
+
+        footer {
+            background-color: #000;
+            color: #999;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="left-side">
+            <h2 class="slogan">Pobreflix</h2>
+            <p class="slogan-complement">O streaming que cabe no seu bolso, sem abrir mão da diversão.</p>
+            <div class="image-placeholder">
+                <img src="https://preview.redd.it/937d163dt8v01.jpg?width=640&crop=smart&auto=webp&s=e13a22e2cdbfba5207b96a813cc7424adb51a2ac" alt="Imagem Pobreflix">
+            </div>
+        </div>
+
+        <div class="right-side">
+            <h1>Acesse filmes e séries</h1>
+            <p>Escolha seu plano para começar a assistir!</p>
+
+            <div class="planos-tabela">
+                <h3>Nossos Planos</h3>
+                <ul>
+                    <li>
+                        <span class="plano-nome">Basic</span>
+                        <span class="plano-preco">R$ 15,90/mês</span>
+                    </li>
+                    <li>
+                        <span class="plano-nome">Premium</span>
+                        <span class="plano-preco">R$ 29,90/mês</span>
+                    </li>
+                    <li>
+                        <span class="plano-nome">Gold</span>
+                        <span class="plano-preco">R$ 49,90/mês</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="input-group">
+                <label for="assinatura">Digite seu tipo de assinatura:</label>
+                <input type="text" id="assinatura" placeholder="Ex: basic, premium, gold">
+            </div>
+            
+            <button onclick="verificarAssinatura()">Acessar</button>
+            <div class="result" id="resultado"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Pobreflix. Todos os direitos reservados.</p>
+        <p>Preços e planos podem sofrer alterações. Consulte o regulamento.</p>
+    </footer>
+
+    <script>
+        function verificarAssinatura() {
+            let assinatura = document.getElementById("assinatura").value.toLowerCase();
+            let resultadoElement = document.getElementById("resultado");
+
+            switch (assinatura) {
+                case "basic":
+                case "premium":
+                case "gold":
+                    resultadoElement.textContent = `Acesso liberado! Redirecionando...`;
+                    window.location.href = "inicial.html";
+                    break;
+                default:
+                    resultadoElement.textContent = "Tipo de assinatura não reconhecida. Tente 'basic', 'premium' ou 'gold'.";
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

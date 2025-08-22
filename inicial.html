@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pobreflix - Início</title>
+    <style>
+        body {
+            background-color: #141414;
+            color: white;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #e50914;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #e50914;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px 50px;
+        }
+
+        .marketing-banner {
+            background-color: #e50914;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            border-left: 5px solid #e50914;
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+        
+        /* Estilo para o container de imagens com grid */
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Reduzido o min-width para 180px */
+            gap: 15px;
+        }
+
+        /* Estilo para as imagens e o efeito de hover */
+        .image-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .image-item:hover {
+            transform: scale(1.05);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .coming-soon-item {
+            background-color: #333;
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 270px; /* Mantém a mesma altura das imagens para alinhamento visual */
+            font-size: 1.5rem;
+            color: #999;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        footer {
+            background-color: #000;
+            color: #999;
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #333;
+        }
+
+        /* Estilos do Modal (Caixa de Detalhes) */
+        .modal {
+            display: none; /* Inicia escondido */
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+            position: relative;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .modal-content .modal-image img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Animação para a caixa do modal */
+        @keyframes animatetop {
+            from { top: -300px; opacity: 0; }
+            to { top: 0; opacity: 1; }
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            text-align: center;
+        }
+
+        .modal-body h3 {
+            color: #e50914;
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        .modal-body p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .modal-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .modal-buttons button {
+            background-color: #e50914;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .modal-buttons button:hover {
+            background-color: #f40612;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">POBREFLIX</div>
+        <nav>
+            <a href="#">Início</a>
+            <a href="#">Filmes</a>
+            <a href="#">Séries</a>
+            <a href="index.html">Sair</a>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="marketing-banner">
+            Acesse já a pobreflix, muito mais barato que certos aplicativos aí...
+        </div>
+
+        <div class="content-section">
+            <h2>Filmes Populares</h2>
+            <div class="image-container" id="filmes-populares">
+                <div class="image-item" data-title="Vingadores: Ultimato" data-summary="Os Vingadores precisam se unir mais uma vez para reverter as ações de Thanos e restaurar o equilíbrio do universo." data-img="https://upload.wikimedia.org/wikipedia/pt/thumb/9/9b/Avengers_Endgame.jpg/250px-Avengers_Endgame.jpg">
+                    <img src="https://lumiere-a.akamaihd.net/v1/images/eu_disneyplus_avengers-endgame_c169_r_f4af8cb5.jpeg?region=355,0,921,921" alt="Vingadores: Ultimato">
+                </div>
+                
+                <div class="image-item" data-title="Karate Kid" data-summary="Após se mudar para a China com sua mãe, Dre Parker se sente um peixe fora d'água até conhecer um mestre de kung fu que o ensina a arte do combate." data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBxWxDdH-rHk9TP32-oKS4RpUNFMdiRmXDfg&s">
+                    <img src="https://m.media-amazon.com/images/I/81L3xP54gsL._UF894,1000_QL80_.jpg" alt="Karate Kid">
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Séries em Alta</h2>
+            <div class="image-container" id="series-em-alta">
+                <div class="image-item" data-title="Cobra Kai" data-summary="Duas décadas após o Torneio de All Valley, Daniel LaRusso e Johnny Lawrence reacendem a rivalidade, reabrindo os dojos de karatê e uma antiga disputa." data-img="https://m.media-amazon.com/images/M/MV5BYjA3NDkwNzktNjJkYi00ODNhLWFhYzQtYzk5NjU4MDM0OWZmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+                    <img src="https://m.media-amazon.com/images/M/MV5BYjA3NDkwNzktNjJkYi00ODNhLWFhYzQtYzk5NjU4MDM0OWZmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Cobra Kai">
+                </div>
+                
+                <div class="coming-soon-item">
+                    Em breve
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Pobreflix. Todos os direitos reservados.</p>
+        <p>Desenvolvido com carinho para o seu bolso.</p>
+    </footer>
+
+    <div id="movieModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="modal-image">
+                <img id="modal-image" src="" alt="Capa do Filme/Série">
+            </div>
+            <div class="modal-body">
+                <h3 id="modal-title"></h3>
+                <p id="modal-summary"></p>
+                <div class="modal-buttons">
+                    <button>Assistir</button>
+                    <button>Salvar</button>
+                    <button>Baixar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Obtém o modal e o botão para fechar
+        const modal = document.getElementById("movieModal");
+        const span = document.getElementsByClassName("close-button")[0];
+        
+        // Obtém os elementos dentro do modal para preencher com os dados
+        const modalTitle = document.getElementById("modal-title");
+        const modalSummary = document.getElementById("modal-summary");
+        const modalImage = document.getElementById("modal-image");
+
+        // Função para abrir o modal com as informações do item clicado
+        function openModal(title, summary, imgUrl) {
+            modal.style.display = "flex";
+            modalTitle.textContent = title;
+            modalSummary.textContent = summary;
+            modalImage.src = imgUrl; // Define a URL da imagem no modal
+        }
+
+        // Adiciona um evento de clique em todos os itens de imagem
+        const imageItems = document.querySelectorAll(".image-item");
+        imageItems.forEach(item => {
+            item.addEventListener("click", () => {
+                const title = item.getAttribute("data-title");
+                const summary = item.getAttribute("data-summary");
+                const imgUrl = item.getAttribute("data-img");
+                openModal(title, summary, imgUrl);
+            });
+        });
+        
+        // Quando o usuário clicar no <span> (x), fecha o modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        // Quando o usuário clicar fora do modal, fecha-o
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
