@@ -6,7 +6,7 @@
     <title>Pobreflix - Início</title>
     <style>
         body {
-            background-color: #141414;
+            background-color: #000;
             color: white;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             margin: 0;
@@ -14,6 +14,50 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fundo de Pipoca */
+        .popcorn-background {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: auto;
+            z-index: 0;
+        }
+
+        .popcorn-background img {
+            width: 100%;
+            height: auto;
+        }
+
+        .popping-corn {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .popcorn-kernel {
+            position: absolute;
+            background-color: #f7d08a;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: float-pop 2s ease-in-out infinite;
+        }
+
+        @keyframes float-pop {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-50px) scale(1); opacity: 0; }
         }
 
         header {
@@ -22,6 +66,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .logo {
@@ -45,6 +91,8 @@
         .main-content {
             flex: 1;
             padding: 20px 50px;
+            position: relative;
+            z-index: 1;
         }
 
         .marketing-banner {
@@ -67,15 +115,13 @@
             padding-left: 10px;
             margin-bottom: 20px;
         }
-        
-        /* Estilo para o container de imagens com grid */
+
         .image-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Reduzido o min-width para 180px */
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
         }
 
-        /* Estilo para as imagens e o efeito de hover */
         .image-item {
             position: relative;
             cursor: pointer;
@@ -93,6 +139,8 @@
             width: 100%;
             height: auto;
             display: block;
+            aspect-ratio: 2/3;
+            object-fit: cover;
         }
 
         .coming-soon-item {
@@ -102,7 +150,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 270px; /* Mantém a mesma altura das imagens para alinhamento visual */
+            height: auto;
+            aspect-ratio: 2/3;
             font-size: 1.5rem;
             color: #999;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -114,11 +163,13 @@
             text-align: center;
             padding: 20px;
             border-top: 1px solid #333;
+            position: relative;
+            z-index: 1;
         }
 
         /* Estilos do Modal (Caixa de Detalhes) */
         .modal {
-            display: none; /* Inicia escondido */
+            display: none;
             position: fixed;
             z-index: 10;
             left: 0;
@@ -144,7 +195,7 @@
             flex-direction: column;
             align-items: center;
         }
-        
+
         .modal-content .modal-image img {
             width: 100%;
             max-width: 250px;
@@ -153,7 +204,6 @@
             margin-bottom: 20px;
         }
 
-        /* Animação para a caixa do modal */
         @keyframes animatetop {
             from { top: -300px; opacity: 0; }
             to { top: 0; opacity: 1; }
@@ -209,13 +259,18 @@
             font-weight: bold;
             transition: background-color 0.3s ease;
         }
-        
+
         .modal-buttons button:hover {
             background-color: #f40612;
         }
     </style>
 </head>
 <body>
+    <div class="popping-corn" id="poppingCornContainer"></div>
+    <div class="popcorn-background">
+        <img src="https://www.pngmart.com/files/1/Popcorn-Bucket-PNG-HD.png" alt="Balde de Pipoca">
+    </div>
+
     <header>
         <div class="logo">POBREFLIX</div>
         <nav>
@@ -235,11 +290,23 @@
             <h2>Filmes Populares</h2>
             <div class="image-container" id="filmes-populares">
                 <div class="image-item" data-title="Vingadores: Ultimato" data-summary="Os Vingadores precisam se unir mais uma vez para reverter as ações de Thanos e restaurar o equilíbrio do universo." data-img="https://upload.wikimedia.org/wikipedia/pt/thumb/9/9b/Avengers_Endgame.jpg/250px-Avengers_Endgame.jpg">
-                    <img src="https://lumiere-a.akamaihd.net/v1/images/eu_disneyplus_avengers-endgame_c169_r_f4af8cb5.jpeg?region=355,0,921,921" alt="Vingadores: Ultimato">
+                    <img src="https://upload.wikimedia.org/wikipedia/pt/thumb/9/9b/Avengers_Endgame.jpg/250px-Avengers_Endgame.jpg" alt="Vingadores: Ultimato">
+                </div>
+
+                <div class="image-item" data-title="Karate Kid" data-summary="Após se mudar para a China com sua mãe, Dre Parker se sente um peixe fora d'água até conhecer um mestre de kung fu que o ensina a arte do combate." data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBxWxDdH-rHk9TP32-oKS4RpUNFMdiRmXDfg&s">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBxWxDdH-rHk9TP32-oKS4RpUNFMdiRmXDfg&s" alt="Karate Kid">
+                </div>
+
+                <div class="image-item" data-title="Batman" data-summary="Em seu segundo ano combatendo o crime, Batman enfrenta os desafios de ser o único protetor de Gotham, enquanto investiga uma série de crimes cometidos por um assassino que deixa enigmas para a polícia." data-img="https://cinema10.com.br/upload/filmes/filmes_2476_images.jpg">
+                    <img src="https://cinema10.com.br/upload/filmes/filmes_2476_images.jpg" alt="Batman">
                 </div>
                 
-                <div class="image-item" data-title="Karate Kid" data-summary="Após se mudar para a China com sua mãe, Dre Parker se sente um peixe fora d'água até conhecer um mestre de kung fu que o ensina a arte do combate." data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBxWxDdH-rHk9TP32-oKS4RpUNFMdiRmXDfg&s">
-                    <img src="https://m.media-amazon.com/images/I/81L3xP54gsL._UF894,1000_QL80_.jpg" alt="Karate Kid">
+                <div class="image-item" data-title="Velozes e Furiosos 10" data-summary="Dom Toretto e sua família são alvos de Dante Reyes, o filho do chefão das drogas Hernan Reyes, que busca vingança pela morte do pai e a perda da fortuna da família." data-img="https://br.web.img3.acsta.net/c_310_420/pictures/23/05/16/22/53/0156803.jpg">
+                    <img src="https://br.web.img3.acsta.net/c_310_420/pictures/23/05/16/22/53/0156803.jpg" alt="Velozes e Furiosos 10">
+                </div>
+
+                <div class="image-item" data-title="Homem-Aranha: Sem Volta Para Casa" data-summary="O Homem-Aranha tem a sua identidade revelada, forçando-o a buscar a ajuda do Doutor Estranho para reverter a situação, o que acaba por abrir portais para o multiverso." data-img="https://upload.wikimedia.org/wikipedia/pt/thumb/0/00/Spider-Man_No_Way_Home_poster.jpg/250px-Spider-Man_No_Way_Home_poster.jpg">
+                    <img src="https://upload.wikimedia.org/wikipedia/pt/thumb/0/00/Spider-Man_No_Way_Home_poster.jpg/250px-Spider-Man_No_Way_Home_poster.jpg" alt="Homem-Aranha: Sem Volta Para Casa">
                 </div>
             </div>
         </div>
@@ -250,9 +317,21 @@
                 <div class="image-item" data-title="Cobra Kai" data-summary="Duas décadas após o Torneio de All Valley, Daniel LaRusso e Johnny Lawrence reacendem a rivalidade, reabrindo os dojos de karatê e uma antiga disputa." data-img="https://m.media-amazon.com/images/M/MV5BYjA3NDkwNzktNjJkYi00ODNhLWFhYzQtYzk5NjU4MDM0OWZmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
                     <img src="https://m.media-amazon.com/images/M/MV5BYjA3NDkwNzktNjJkYi00ODNhLWFhYzQtYzk5NjU4MDM0OWZmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Cobra Kai">
                 </div>
+
+                <div class="image-item" data-title="The Chosen" data-summary="A vida de Jesus Cristo é contada a partir da perspectiva de pessoas que o conheceram de perto, mostrando seus milagres e ensinamentos de uma forma única." data-img="https://shoppingcidadedasflores.com.br/wp-content/uploads/2024/03/THE-CHOSEN-OS-ESCOLHIDOS-453x675.jpg">
+                    <img src="https://shoppingcidadedasflores.com.br/wp-content/uploads/2024/03/THE-CHOSEN-OS-ESCOLHIDOS-453x675.jpg" alt="The Chosen">
+                </div>
                 
-                <div class="coming-soon-item">
-                    Em breve
+                <div class="image-item" data-title="Wandinha" data-summary="Wandinha Addams é enviada para a Nevermore Academy, onde tenta dominar sua habilidade psíquica emergente, deter um monstro assassino que aterroriza a cidade e resolver o mistério que envolve seus pais há 25 anos." data-img="https://br.web.img3.acsta.net/c_310_420/pictures/22/09/23/20/14/0505071.jpg">
+                    <img src="https://br.web.img3.acsta.net/c_310_420/pictures/22/09/23/20/14/0505071.jpg" alt="Wandinha">
+                </div>
+
+                <div class="image-item" data-title="Stranger Things" data-summary="Quando um garoto desaparece, seus amigos, a família e a polícia procuram respostas e acabam envolvidos em um mistério com experimentos secretos, forças sobrenaturais e uma garotinha estranha." data-img="https://conteudo.imguol.com.br/c/entretenimento/42/2019/06/04/arte-da-terceira-temporada-de-stranger-things-1559664348300_v2_1296x1920.jpg">
+                    <img src="https://conteudo.imguol.com.br/c/entretenimento/42/2019/06/04/arte-da-terceira-temporada-de-stranger-things-1559664348300_v2_1296x1920.jpg" alt="Stranger Things">
+                </div>
+
+                <div class="image-item" data-title="Vingadores Unidos" data-summary="A equipe de super-heróis mais poderosa da Terra se une para enfrentar ameaças que nenhum herói sozinho poderia deter." data-img="https://m.media-amazon.com/images/M/MV5BZDk1NjVjMGQtNDgxZC00MmFlLThkNTUtYTI4ZjQ2NzEwMTVmXkEyXkFqcGc@._V1_.jpg">
+                    <img src="https://m.media-amazon.com/images/M/MV5BZDk1NjVjMGQtNDgxZC00MmFlLThkNTUtYTI4ZjQ2NzEwMTVmXkEyXkFqcGc@._V1_.jpg" alt="Desenho Vingadores Unidos">
                 </div>
             </div>
         </div>
@@ -282,24 +361,37 @@
     </div>
 
     <script>
-        // Obtém o modal e o botão para fechar
         const modal = document.getElementById("movieModal");
         const span = document.getElementsByClassName("close-button")[0];
-        
-        // Obtém os elementos dentro do modal para preencher com os dados
         const modalTitle = document.getElementById("modal-title");
         const modalSummary = document.getElementById("modal-summary");
         const modalImage = document.getElementById("modal-image");
+        const poppingCornContainer = document.getElementById("poppingCornContainer");
 
-        // Função para abrir o modal com as informações do item clicado
+        function createPopcorn() {
+            const kernel = document.createElement('div');
+            kernel.classList.add('popcorn-kernel');
+            const xPos = Math.random() * 100;
+            const startDelay = Math.random() * 2;
+            kernel.style.left = `${xPos}%`;
+            kernel.style.animationDelay = `${startDelay}s`;
+            kernel.style.animationDuration = `${Math.random() * 1 + 1.5}s`;
+            poppingCornContainer.appendChild(kernel);
+
+            setTimeout(() => {
+                poppingCornContainer.removeChild(kernel);
+            }, 3000);
+        }
+
+        setInterval(createPopcorn, 200);
+
         function openModal(title, summary, imgUrl) {
             modal.style.display = "flex";
             modalTitle.textContent = title;
             modalSummary.textContent = summary;
-            modalImage.src = imgUrl; // Define a URL da imagem no modal
+            modalImage.src = imgUrl;
         }
 
-        // Adiciona um evento de clique em todos os itens de imagem
         const imageItems = document.querySelectorAll(".image-item");
         imageItems.forEach(item => {
             item.addEventListener("click", () => {
@@ -309,13 +401,11 @@
                 openModal(title, summary, imgUrl);
             });
         });
-        
-        // Quando o usuário clicar no <span> (x), fecha o modal
+
         span.onclick = function() {
             modal.style.display = "none";
         }
-        
-        // Quando o usuário clicar fora do modal, fecha-o
+
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
